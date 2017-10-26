@@ -201,7 +201,9 @@
                     },
                     function (result, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
-                            document.getElementById('address').innerHTML = result[0].formatted_address;
+                            if (infoWindow.marker == marker) {
+                                document.getElementById('address').innerHTML = result[0].formatted_address;
+                            }
                         } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
                             window.alert('Could Not Find The Location');
                         } else {
@@ -221,6 +223,10 @@
 
                 $.getJSON(flickrAPIUrl, function (data) {
                         if (data.stat === 'ok') {
+                            if (infoWindow.marker != marker) {
+                                return;
+                            }
+
                             if (data.photos.photo.length > 0) {
                                 var photoData = data.photos.photo[0];
                                 var photoUrl = 'https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg';
