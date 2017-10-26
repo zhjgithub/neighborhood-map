@@ -1,0 +1,27 @@
+{
+  "name": "neighborhood-map",
+  "version": "1.0.0",
+  "description": "Resolution of the neighborhood map project from Udacity.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-uglify": "^3.0.0"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp-inject-svg": "^0.1.16",
+    "gulp-jshint": "^2.0.4",
+    "jshint": "^2.9.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
