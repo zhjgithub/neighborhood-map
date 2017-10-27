@@ -59,8 +59,10 @@ function initMap() {
     window.onresize = function () {
         resizeMapHeight();
 
-        google.maps.event.trigger(map, 'resize');
-        updateBounds();
+        if (map) {
+            google.maps.event.trigger(map, 'resize');
+            updateBounds();
+        }
     }
 
     largeInfoWindow = new google.maps.InfoWindow();
@@ -220,7 +222,10 @@ function populateInfoWindow(marker, infoWindow) {
 }
 
 function closeInfoWindowAndStopAnimation() {
-    largeInfoWindow.close();
+
+    if (largeInfoWindow) {
+        largeInfoWindow.close();
+    }
 
     if (selectedMarker && selectedMarker.getAnimation() !== null) {
         selectedMarker.setAnimation(null);
@@ -263,19 +268,21 @@ function mapErrorHandler() {
         }
 
         self.onFilterLocations = function () {
-            var inputText = self.inputText().toLowerCase();
-            var title;
 
             closeInfoWindowAndStopAnimation();
 
+            var inputText = self.inputText().toLowerCase();
+            var title;
+            var isShow;
+
             for (var i = 0; i < self.locations().length; i++) {
                 title = self.locations()[i].title();
-                if (inputText === '' || title.toLowerCase().indexOf(inputText) !== -1) {
-                    self.locations()[i].visible(true);
-                    markers[i].setVisible(true);
-                } else {
-                    self.locations()[i].visible(false);
-                    markers[i].setVisible(false);
+                isShow = inputText === '' || title.toLowerCase().indexOf(inputText) !== -1;
+
+                self.locations()[i].visible(isShow);
+
+                if (markers[i]) {
+                    markers[i].setVisible(isShow);
                 }
             }
         }
